@@ -55,12 +55,15 @@ function draw() {
   }
   pop();
 
-  // 在影像外部上方置中加上深咖啡色的文字
+  // 在影像外部上方置中加上深咖啡色的名字
   fill(92, 64, 51);     // 深咖啡色
   noStroke();
   textAlign(CENTER, CENTER);
   textSize(32);         // 設定文字大小
-  text("414730233 林子靖\n作品為影像辨識_耳環臉譜", width / 2, height * 0.12);
+  text("414730233 林子靖", width / 2, height * 0.12);
+
+  // 在影像外部下方置中加上作品名稱
+  text("作品為影像辨識_耳環臉譜", width / 2, height * 0.88);
 }
 
 // 繪製三個金色空心圓圈作為耳環
