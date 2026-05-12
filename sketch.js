@@ -19,12 +19,13 @@ function setup() {
 
   // 載入最新版 ml5.js (v1.x) 的 faceMesh 模型
   facemesh = ml5.faceMesh({ maxFaces: 1 }, modelReady);
-  // 開始持續偵測攝影機影像
-  facemesh.detectStart(capture, results => { predictions = results; });
 }
 
 function modelReady() {
   console.log('Facemesh 模型載入完成！');
+  
+  // 必須等模型完全載入後，才能開始持續偵測攝影機影像
+  facemesh.detectStart(capture, results => { predictions = results; });
 }
 
 function draw() {
