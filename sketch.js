@@ -66,6 +66,8 @@ function checkReady() {
 function draw() {
   // 畫布背景顏色為淡黃色
   background(255, 255, 204);
+  
+  let currentFingers = 0; // 記錄目前偵測到的手指數量
 
   // 設定影像繪製模式為中心點，方便後續置中對齊
   imageMode(CENTER);
@@ -90,9 +92,9 @@ function draw() {
     
     // 判斷手勢並決定要顯示哪一款耳環
     if (handPredictions.length > 0) {
-      let fingers = countFingers(handPredictions[0]);
-      if (fingers >= 1 && fingers <= 5) {
-        currentEarringIndex = fingers - 1;
+      currentFingers = countFingers(handPredictions[0]);
+      if (currentFingers >= 1 && currentFingers <= 5) {
+        currentEarringIndex = currentFingers - 1;
       }
     }
 
@@ -116,6 +118,9 @@ function draw() {
   textAlign(CENTER, CENTER);
   textSize(32);         // 設定文字大小
   text("414730233 林子靖", width / 2, height * 0.12);
+  
+  // 在名字下方加上目前偵測到的手指數量
+  text("目前偵測到 " + currentFingers + " 根手指", width / 2, height * 0.18);
 
   // 在影像外部下方置中加上作品名稱
   text("作品為影像辨識_耳環臉譜", width / 2, height * 0.88);
@@ -132,10 +137,10 @@ function drawEarrings(pt, isRightEar) {
   // 根據畫布大小自適應計算耳環圖片的大小
   let imgSize = min(width, height) * 0.08; 
   
-  // 依照比例往外、往上移動
+  // 依照比例往外、往下移動
   // isRightEar 為 true 時代表原影像中的右耳 (x 座標較大)，往外移則是加；左耳則為減
   let offsetX = imgSize * 0.4 * (isRightEar ? 1 : -1);
-  let offsetY = -imgSize * 0.3;
+  let offsetY = imgSize * 0.2; // 改為正值，讓耳環往下移
   
   // 在耳垂位置畫出當前對應的耳環圖片
   image(earringImgs[currentEarringIndex], x + offsetX, y + offsetY + imgSize / 2, imgSize, imgSize);
