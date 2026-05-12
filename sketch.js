@@ -54,9 +54,16 @@ function draw() {
     }
   }
   pop();
+
+  // 在影像外部上方置中加上深咖啡色的文字
+  fill(92, 64, 51);     // 深咖啡色
+  noStroke();
+  textAlign(CENTER, CENTER);
+  textSize(32);         // 設定文字大小
+  text("414730233 林子靖\n作品為影像辨識_耳環臉譜", width / 2, height * 0.12);
 }
 
-// 繪製三個金色圓圈作為耳環
+// 繪製三個金色空心圓圈作為耳環
 function drawEarrings(pt) {
   if (!pt) return;
 
@@ -64,13 +71,14 @@ function drawEarrings(pt) {
   let x = map(pt.x, 0, capture.width, -width * 0.25, width * 0.25);
   let y = map(pt.y, 0, capture.height, -height * 0.25, height * 0.25);
 
-  fill(255, 215, 0); // 金色
-  noStroke();
+  noFill();             // 設定為空心
+  stroke(255, 215, 0);  // 金色線條
+  strokeWeight(2);      // 設定線條粗細
 
   let circleSize = min(width, height) * 0.015; // 圓圈大小自適應
   let spacing = circleSize * 1.5; // 圓圈之間的間距
 
-  // 從耳垂位置開始往下畫三個圓圈
+  // 從耳垂位置開始往下畫三個空心圓圈
   for (let j = 0; j < 3; j++) {
     circle(x, y + j * spacing, circleSize);
   }
